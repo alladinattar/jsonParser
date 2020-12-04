@@ -27,24 +27,37 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
-# TODO: change template word to project name and delete this comment
-add_library(template INTERFACE)
+hunter_add_package(nlohmann_json)
+find_package(nlohmann_json CONFIG REQUIRED)
 
-add_executable(demo
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
-)
+# TODO: change template word to project name and delete this comment
+add_library(template STATIC
+        # enum your files and delete this comment
+        #${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
+        include/jsonParser.hpp sources/jsonParser.cpp sources/student.cpp include/student.hpp sources/student.cpp)
 
 add_executable(tests
-  # TODO: enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
-)
+        # TODO: enum your files and delete this comment
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/student.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/jsonParser.cpp
+        #sources/main.cpp
+        )
+
+
 
 target_include_directories(template
-  INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+        PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include nlohmann_json::nlohmann_json
+        )
+target_include_directories(tests
+        PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include GTest::gmock_main nlohmann_json::nlohmann_json
+        )
+
+target_link_libraries(tests GTest::gmock_main nlohmann_json::nlohmann_json template)
+target_link_libraries(template nlohmann_json::nlohmann_json)
 
 # TODO: change template word to project name and delete this comment
-target_link_libraries(tests GTest::gtest_main template)
+
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests)
