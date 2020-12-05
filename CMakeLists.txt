@@ -70,3 +70,4 @@ if(BUILD_COVERAGE)
   list(APPEND LCOV_REMOVE_PATTERNS "'${PROJECT_SOURCE_DIR}/tests/*'")
   coverage_evaluate()
 endif()
+#
