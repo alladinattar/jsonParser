@@ -82,14 +82,12 @@ std::string studentsFormatter::getStudentString(int indexOfStudent) {
 
 std::string studentsFormatter::getStudentsTable() {
   std::stringstream ss;
-  // pprint shapku
   ss << std::setw(2) << "| " << std::setw(nameWidth) << std::left << "name"
      << std::setw(3) << " | " << std::setw(groupWidth) << std::left << "group"
      << std::setw(3) << " | " << std::setw(avgWidth) << std::left << "avg"
      << std::setw(3) << " | " << std::setw(debtWidth) << "debt" << std::setw(2)
      << " |"
      << "\n";
-  // print separator
   ss << std::setw(1) << "|" << std::setw(nameWidth + 2) << std::setfill('-')
      << "" << std::setw(1) << "|" << std::setw(groupWidth + 2)
      << std::setfill('-') << ""
@@ -97,7 +95,6 @@ std::string studentsFormatter::getStudentsTable() {
      << "|" << std::setw(debtWidth + 2) << std::setfill('-') << ""
      << std::setw(1) << "|"
      << "\n";
-  // print content
   for (size_t i = 0; i < students.size(); ++i) {
     if (i != students.size() - 1) {
       ss << getStudentString(i) << "\n";

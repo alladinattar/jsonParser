@@ -1,4 +1,4 @@
-// Copyright 2020 Your Name <your_email>
+// Copyright 2020 Rinat <rinamuka4@gmail.com>
 
 #include <gtest/gtest.h>
 #include "jsonParser.hpp"

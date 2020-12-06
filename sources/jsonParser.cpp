@@ -13,7 +13,6 @@
 #include "vector"
 using nlohmann::json;
 
-// construtor
 jsonParser::jsonParser(std::string jsonPath) {
   if (jsonPath[0] != '{') {
     if (jsonPath.empty())
@@ -38,7 +37,6 @@ jsonParser::jsonParser(std::string jsonPath) {
   }
 }
 
-// parse json to vector of students
 void jsonParser::parseData() {
   for (auto const& item : data.at("items")) {
     auto studentObj = item.get<student>();
