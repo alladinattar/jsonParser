@@ -99,9 +99,15 @@ std::string studentsFormatter::getStudentsTable() {
     if (i != students.size() - 1) {
       ss << getStudentString(i) << "\n";
     } else {
-      ss << getStudentString(i);
+      ss << getStudentString(i)<<"\n";
     }
   }
+  ss << std::setw(1) << "|" << std::setw(nameWidth + 2) << std::setfill('-')
+     << "" << std::setw(1) << "|" << std::setw(groupWidth + 2)
+     << std::setfill('-') << ""
+     << "|" << std::setw(avgWidth + 2) << std::setfill('-') << ""
+     << "|" << std::setw(debtWidth + 2) << std::setfill('-') << ""
+     << std::setw(1) << "|";
   return ss.str();
 }
 

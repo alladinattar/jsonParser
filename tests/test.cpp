@@ -199,9 +199,10 @@ TEST(jsonParser, printTable){
 })");
   parser.parseData();
   studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
-  ASSERT_EQ(formatter.getStudentsTable(),
+  ASSERT_EQ(formatter.getStudentsTable(), "| name          | group  | avg  | debt    |\n"
             "|---------------|--------|------|---------|\n"
             "| Ivanov Petr   | 1      | 4.25 | null    |\n"
             "| Sidorov Ivan  | 31     | 4    | C++     |\n"
-            "| Pertov Nikita | IU8-31 | 3.33 | Network |");
+            "| Pertov Nikita | IU8-31 | 3.33 | 3 items |\n"
+            "|---------------|--------|------|---------|");
 }
