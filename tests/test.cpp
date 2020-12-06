@@ -167,3 +167,41 @@ TEST(jsonParser, nullAvg){
             "| Pertov Nikita | IU8-31 | 3.33 | 3 items |");
 }
 
+TEST(jsonParser, printTable){
+  jsonParser parser = jsonParser(R"({
+  "items": [
+    {
+      "name": "Ivanov Petr",
+      "group": "1",
+      "avg": "4.25",
+      "debt": null
+    },
+    {
+      "name": "Sidorov Ivan",
+      "group": 31,
+      "avg": 4,
+      "debt": "C++"
+    },
+    {
+      "name": "Pertov Nikita",
+      "group": "IU8-31",
+      "avg": 3.33,
+      "debt": [
+        "C++",
+        "Linux",
+        "Network"
+      ]
+    }
+  ],
+  "_meta": {
+    "count": 3
+  }
+})");
+  parser.parseData();
+  studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
+  ASSERT_EQ(formatter.getStudentsTable(),
+            "|---------------|--------|------|---------|\n"
+            "| Ivanov Petr   | 1      | 4.25 | null    |\n"
+            "| Sidorov Ivan  | 31     | 4    | C++     |\n"
+            "| Pertov Nikita | IU8-31 | 3.33 | Network |");
+}
