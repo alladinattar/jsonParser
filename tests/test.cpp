@@ -349,5 +349,5 @@ TEST(jsonParser, groupWidth){
 })");
   parser.parseData();
   studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
-  ASSERT_EQ(formatter.getNameWidth(), 6);
+  ASSERT_EQ(formatter.getGroupWidth(), 6);
 }
