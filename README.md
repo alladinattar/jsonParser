@@ -176,7 +176,7 @@ void print(const student_t& student, std::ostream& os) {
     }
 }
 ```
-#Travic
+# Travic
 ```
 In file included from /home/travis/build/rinamuka/laba_1/sources/jsonParser.cpp:5:0:
 /home/travis/build/rinamuka/laba_1/include/jsonParser.hpp:5:15: fatal error: any: No such file or directory
