@@ -34,7 +34,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 add_library(template STATIC
         # enum your files and delete this comment
         #${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
-        include/jsonParser.hpp sources/jsonParser.cpp sources/student.cpp include/student.hpp sources/student.cpp)
+        include/jsonParser.hpp sources/jsonParser.cpp sources/student.cpp include/student.hpp sources/student.cpp sources/main.cpp)
 
 add_executable(tests
         # TODO: enum your files and delete this comment

@@ -3,15 +3,15 @@
 #include <gtest/gtest.h>
 #include "jsonParser.hpp"
 
-TEST(jsonParser, empty_path){
+TEST(jsonParser, emptyPath){
   ASSERT_THROW(jsonParser(""), std::invalid_argument);
 }
 
-TEST(jsonParser, empty_array){
+TEST(jsonParser, emptyArray){
   ASSERT_THROW(jsonParser((R"({})")), std::invalid_argument);
 }
 
-TEST(jsonParser, simple_array){
+TEST(jsonParser, simpleArray){
   jsonParser parser = jsonParser(R"({
   "items": [
     {
@@ -45,15 +45,15 @@ TEST(jsonParser, simple_array){
             "| Pertov Nikita | IU8-31 | 3.33 | Network |");
 }
 
-TEST(jsonParser, invalid_path){
+TEST(jsonParser, invalidPath){
   ASSERT_THROW(jsonParser("/sd.json"), std::out_of_range);
 }
 
-TEST(jsonParser, correct_file){
+TEST(jsonParser, correctFile){
   ASSERT_THROW(jsonParser("tes.json"), std::out_of_range);
 }
 
-TEST(jsonParser, size_test){
+TEST(jsonParser, sizeTest){
   ASSERT_THROW(jsonParser(R"({
   "items": [
     {
@@ -86,7 +86,7 @@ TEST(jsonParser, size_test){
 }
 
 
-TEST(jsonParser, correct_out){
+TEST(jsonParser, correctOut){
   jsonParser parser = jsonParser(R"({
   "items": [
     {
@@ -125,3 +125,45 @@ TEST(jsonParser, correct_out){
   ASSERT_EQ(formatter.getStudentString(2),
             "| Pertov Nikita | IU8-31 | 3.33 | 3 items |");
 }
+
+
+TEST(jsonParser, nullAvg){
+  jsonParser parser = jsonParser(R"({
+  "items": [
+    {
+      "name": "Ivanov Petr",
+      "group": "1",
+      "avg": null,
+      "debt": null
+    },
+    {
+      "name": "Sidorov Ivan",
+      "group": 31,
+      "avg": 4,
+      "debt": "C++"
+    },
+    {
+      "name": "Pertov Nikita",
+      "group": "IU8-31",
+      "avg": 3.33,
+      "debt": [
+        "C++",
+        "Linux",
+        "Network"
+      ]
+    }
+  ],
+  "_meta": {
+    "count": 3
+  }
+})");
+  parser.parseData();
+  studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
+  ASSERT_EQ(formatter.getStudentString(0),
+            "| Ivanov Petr   | 1      | null | null    |");
+  ASSERT_EQ(formatter.getStudentString(1),
+            "| Sidorov Ivan  | 31     | 4    | C++     |");
+  ASSERT_EQ(formatter.getStudentString(2),
+            "| Pertov Nikita | IU8-31 | 3.33 | 3 items |");
+}
+
