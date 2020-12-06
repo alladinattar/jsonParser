@@ -199,10 +199,120 @@ TEST(jsonParser, printTable){
 })");
   parser.parseData();
   studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
-  ASSERT_EQ(formatter.getStudentsTable(), "| name          | group  | avg  | debt    |\n"
+  ASSERT_EQ(formatter.getStudentsTable(),
+            "| name          | group  | avg  | debt    |\n"
             "|---------------|--------|------|---------|\n"
             "| Ivanov Petr   | 1      | 4.25 | null    |\n"
             "| Sidorov Ivan  | 31     | 4    | C++     |\n"
             "| Pertov Nikita | IU8-31 | 3.33 | 3 items |\n"
             "|---------------|--------|------|---------|");
 }
+
+
+TEST(jsonParser, widthDebt){
+jsonParser parser = jsonParser(R"({
+  "items": [
+    {
+      "name": "Ivanov Petr",
+      "group": "1",
+      "avg": "4.25",
+      "debt": null
+    },
+    {
+      "name": "Sidorov Ivan",
+      "group": 31,
+      "avg": 4,
+      "debt": "C++"
+    },
+    {
+      "name": "Pertov Nikita",
+      "group": "IU8-31",
+      "avg": 3.33,
+      "debt": [
+        "C++",
+        "Linux",
+        "Network"
+      ]
+    }
+  ],
+  "_meta": {
+    "count": 3
+  }
+})");
+parser.parseData();
+studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
+ASSERT_EQ(formatter.getDebtWidth(),7);
+}
+
+
+TEST(jsonParser, widthAvg){
+  jsonParser parser = jsonParser(R"({
+  "items": [
+    {
+      "name": "Ivanov Petr",
+      "group": "1",
+      "avg": "4.25",
+      "debt": null
+    },
+    {
+      "name": "Sidorov Ivan",
+      "group": 31,
+      "avg": 4,
+      "debt": "C++"
+    },
+    {
+      "name": "Pertov Nikita",
+      "group": "IU8-31",
+      "avg": 3.33,
+      "debt": [
+        "C++",
+        "Linux",
+        "Network"
+      ]
+    }
+  ],
+  "_meta": {
+    "count": 3
+  }
+})");
+  parser.parseData();
+  studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
+  ASSERT_EQ(formatter.getAvgWidth(),4);
+}
+
+TEST(jsonParser, nameAvg){
+  jsonParser parser = jsonParser(R"({
+  "items": [
+    {
+      "name": "Ivanov Petr",
+      "group": "1",
+      "avg": "4.25",
+      "debt": null
+    },
+    {
+      "name": "Sidorov Ivan",
+      "group": 31,
+      "avg": 4,
+      "debt": "C++"
+    },
+    {
+      "name": "Pertov Nikita",
+      "group": "IU8-31",
+      "avg": 3.33,
+      "debt": [
+        "C++",
+        "Linux",
+        "Network"
+      ]
+    }
+  ],
+  "_meta": {
+    "count": 3
+  }
+})");
+  parser.parseData();
+  studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
+  ASSERT_EQ(formatter.getNameWidth(),13);
+}
+
+

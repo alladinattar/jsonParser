@@ -99,7 +99,7 @@ std::string studentsFormatter::getStudentsTable() {
     if (i != students.size() - 1) {
       ss << getStudentString(i) << "\n";
     } else {
-      ss << getStudentString(i)<<"\n";
+      ss << getStudentString(i) << "\n";
     }
   }
   ss << std::setw(1) << "|" << std::setw(nameWidth + 2) << std::setfill('-')
