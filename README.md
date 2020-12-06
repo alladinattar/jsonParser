@@ -176,3 +176,21 @@ void print(const student_t& student, std::ostream& os) {
     }
 }
 ```
+#Travic
+```
+In file included from /home/travis/build/rinamuka/laba_1/sources/jsonParser.cpp:5:0:
+/home/travis/build/rinamuka/laba_1/include/jsonParser.hpp:5:15: fatal error: any: No such file or directory
+compilation terminated.
+CMakeFiles/template.dir/build.make:62: recipe for target 'CMakeFiles/template.dir/sources/jsonParser.cpp.o' failed
+make[2]: *** [CMakeFiles/template.dir/sources/jsonParser.cpp.o] Error 1
+CMakeFiles/Makefile2:72: recipe for target 'CMakeFiles/template.dir/all' failed
+make[1]: *** [CMakeFiles/template.dir/all] Error 2
+Makefile:94: recipe for target 'all' failed
+make: *** [all] Error 2
+The command "./scripts/coverage.sh" exited with 2.
+0.22s$ docker run --env-file .env -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/coverage.sh
+docker: open .env: no such file or directory.
+See 'docker run --help'.
+The command "docker run --env-file .env -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/coverage.sh" exited with 125.
+Done. Your build exited with 1.
+```
