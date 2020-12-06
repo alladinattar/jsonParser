@@ -241,7 +241,7 @@ jsonParser parser = jsonParser(R"({
 })");
 parser.parseData();
 studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
-ASSERT_EQ(formatter.getDebtWidth(),7);
+ASSERT_EQ(formatter.getDebtWidth(), 7);
 }
 
 
@@ -277,7 +277,7 @@ TEST(jsonParser, widthAvg){
 })");
   parser.parseData();
   studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
-  ASSERT_EQ(formatter.getAvgWidth(),4);
+  ASSERT_EQ(formatter.getAvgWidth(), 4);
 }
 
 TEST(jsonParser, nameAvg){
@@ -312,7 +312,42 @@ TEST(jsonParser, nameAvg){
 })");
   parser.parseData();
   studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
-  ASSERT_EQ(formatter.getNameWidth(),13);
+  ASSERT_EQ(formatter.getNameWidth(), 13);
 }
 
 
+
+TEST(jsonParser, groupWidth){
+  jsonParser parser = jsonParser(R"({
+  "items": [
+    {
+      "name": "Ivanov Petr",
+      "group": "1",
+      "avg": "4.25",
+      "debt": null
+    },
+    {
+      "name": "Sidorov Ivan",
+      "group": 31,
+      "avg": 4,
+      "debt": "C++"
+    },
+    {
+      "name": "Pertov Nikita",
+      "group": "IU8-31",
+      "avg": 3.33,
+      "debt": [
+        "C++",
+        "Linux",
+        "Network"
+      ]
+    }
+  ],
+  "_meta": {
+    "count": 3
+  }
+})");
+  parser.parseData();
+  studentsFormatter formatter = studentsFormatter(parser.getStudentsVector());
+  ASSERT_EQ(formatter.getNameWidth(), 6);
+}
