@@ -13,7 +13,7 @@
 #include "vector"
 using nlohmann::json;
 
-jsonParser::jsonParser(std::string jsonPath) {
+jsonParser::jsonParser(const std::string& jsonPath) {
   if (jsonPath[0] != '{') {
     if (jsonPath.empty())
       throw std::invalid_argument("the path isn't available");

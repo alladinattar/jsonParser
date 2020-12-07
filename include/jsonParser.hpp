@@ -25,7 +25,7 @@ class jsonParser {
   std::vector<student> students;
 
  public:
-  explicit jsonParser(string);
+  explicit jsonParser(const string&);
   void parseData();
   std::vector<student> getStudentsVector();
 };
